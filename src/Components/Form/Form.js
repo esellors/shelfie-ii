@@ -1,4 +1,14 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
+
+
+
+// NEED TO FIND OUT WHY POSTING FROM PAGE DOES NOT WORK BUT WORKS FROM POSTMAN
+// POSSIBLE ISSUE WITH PUTTING endpoints in massive block?
+
+
+
 
 class Form extends Component {
    constructor(props) {
@@ -6,9 +16,10 @@ class Form extends Component {
       this.state = {
          name: '',
          price: 0,
-         image: ''
+         image: 'https://via.placeholder.com/150'
       }
       this.handleUserInput = this.handleUserInput.bind(this);
+      this.addProduct = this.addProduct.bind(this);
       this.clearUserInput = this.clearUserInput.bind(this);
    }
    handleUserInput(e) {
@@ -33,14 +44,27 @@ class Form extends Component {
       }
    }
    clearUserInput(e) {
-      e.preventDefault();
       this.setState({
          name: '',
          price: 0,
          image: ''
       })
    }
+   addProduct(e) {
+      e.preventDefault();
+      console.log('+++++ ADD BUTTON CLICKED +++++')
+
+      axios.post('/api/product', this.state)
+         .then(() => {
+            this.props.getInventory();
+            this.clearUserInput();
+         })
+         .catch(err => console.log(err));
+   }
    render() {
+
+      console.log('Form.js rendered');
+
       return (
          <div id='input_product_container'>
 
@@ -53,8 +77,10 @@ class Form extends Component {
                <input type='text' name='input_name' id='input_name' value={this.state.name} onChange={this.handleUserInput} />
                <label htmlFor='input_price'>Price:</label>
                <input type='text' name='input_price' id='input_price' value={this.state.price} onChange={this.handleUserInput} />
-               <button onClick={this.clearUserInput}>Cancel</button>
-               <button>Add to Inventory</button>
+
+               <input type='button' value='Cancel' onClick={this.clearUserInput} />
+
+               <input type='submit' value='Add to Inventory' onClick={this.addProduct} />
             </form>
          </div>
       )

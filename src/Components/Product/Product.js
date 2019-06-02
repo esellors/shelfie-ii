@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 class Product extends Component {
    render() {
 
+      console.log('Product.js rendered');
+
       const {name, price, image} = this.props.item;
 
       return (

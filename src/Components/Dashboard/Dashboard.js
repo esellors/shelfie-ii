@@ -4,6 +4,8 @@ import Product from '../Product/Product';
 class Dashboard extends Component {
    render() {
 
+      console.log('Dashboard.js rendered');
+
       const {inventory} = this.props;
 
       return (
