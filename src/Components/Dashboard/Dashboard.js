@@ -13,9 +13,11 @@ class Dashboard extends Component {
             <h1>Dashboard</h1>
 
             {
-               inventory.map((item, index) => {
-                  return <Product item={item} key={index} />
-               })
+    
+                  inventory.map((item, index) => {
+                     return <Product item={item} key={index} />
+                  })
+      
             }
 
          </div>

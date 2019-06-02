@@ -1,32 +1,27 @@
 import React, {Component} from 'react';
 import './App.css';
+import axios from 'axios';
 import Header from './Components/Header/Header';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Form from './Components/Form/Form';
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory: [
-        {
-          name: 'Nike',
-          price: 75,
-          image: 'https://via.placeholder.com/150'
-        },
-        {
-          name: 'Adidas',
-          price: 90,
-          image: 'https://via.placeholder.com/150'
-        },
-        {
-          name: 'New Balance',
-          price: 85,
-          image: 'https://via.placeholder.com/150'
-        }
-      ]
+      inventory: []
     }
+  }
+  componentDidMount() {
+    this.getInventory();
+  }
+  getInventory() {
+    axios.get('/api/inventory')
+      .then(res => {
+        this.setState({
+          inventory: res.data
+        })
+      })
   }
   render() {
     return (
