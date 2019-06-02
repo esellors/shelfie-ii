@@ -43,7 +43,7 @@ class Form extends Component {
             break;
       }
    }
-   clearUserInput(e) {
+   clearUserInput() {
       this.setState({
          name: '',
          price: 0,

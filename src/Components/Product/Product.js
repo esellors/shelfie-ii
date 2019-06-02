@@ -5,7 +5,7 @@ class Product extends Component {
 
       console.log('Product.js rendered');
 
-      const {name, price, image} = this.props.item;
+      const {id, name, price, image} = this.props.item;
 
       return (
          <>
@@ -15,6 +15,8 @@ class Product extends Component {
             <img src={image} alt={name} />
             <h2>{name}</h2>
             <h2>{price}</h2>
+
+            <input type='button' value='Delete' name={id} onClick={this.props.deleteProduct}/>
 
          </>
       );
