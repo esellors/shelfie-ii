@@ -29,7 +29,7 @@ class Dashboard extends Component {
             {
     
                   inventory.map((item, index) => {
-                     return <Product item={item} key={index} deleteProduct={this.deleteProduct} />
+                     return <Product item={item} key={index} deleteProduct={this.deleteProduct} getSelectedProduct={this.props.getSelectedProduct} />
                   })
       
             }

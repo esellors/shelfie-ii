@@ -1,26 +1,28 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-
-
-
-// NEED TO FIND OUT WHY POSTING FROM PAGE DOES NOT WORK BUT WORKS FROM POSTMAN
-// POSSIBLE ISSUE WITH PUTTING endpoints in massive block?
-
-
-
-
 class Form extends Component {
    constructor(props) {
       super(props);
       this.state = {
          name: '',
          price: 0,
-         image: 'https://via.placeholder.com/150'
+         image: 'https://via.placeholder.com/150',
+         selectedProduct: null
       }
       this.handleUserInput = this.handleUserInput.bind(this);
       this.addProduct = this.addProduct.bind(this);
       this.clearUserInput = this.clearUserInput.bind(this);
+   }
+   componentDidUpdate(prevProps) {
+      if (prevProps.selectedProduct !== this.props.selectedProduct) {
+         this.setState({
+            selectedProduct: this.props.selectedProduct
+         })
+      }
+      
+
+
    }
    handleUserInput(e) {
       switch(e.target.name) {
@@ -75,6 +77,7 @@ class Form extends Component {
                <input type='text' name='input_image' id='input_image' value={this.state.image} onChange={this.handleUserInput} />
                <label htmlFor='input_name'>Product Name:</label>
                <input type='text' name='input_name' id='input_name' value={this.state.name} onChange={this.handleUserInput} />
+               
                <label htmlFor='input_price'>Price:</label>
                <input type='text' name='input_price' id='input_price' value={this.state.price} onChange={this.handleUserInput} />
 

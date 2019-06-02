@@ -9,13 +9,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory: []
+      inventory: [],
+      selectedProduct: null
     }
     this.getInventory = this.getInventory.bind(this);
+    this.getSelectedProduct = this.getSelectedProduct.bind(this);
   }
   componentDidMount() {
     setTimeout(() => {
-      this.getInventory();
+      this.getInventory()
     }, 1500);
   }
   getInventory() {
@@ -25,6 +27,13 @@ class App extends Component {
           inventory: res.data
         })
       })
+      .catch(err => console.log(err));
+  }
+  getSelectedProduct(e) {
+    console.log(e.target.name)
+    this.setState({
+      selectedProduct: e.target
+    })
   }
   render() {
 
@@ -33,8 +42,10 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Dashboard inventory={this.state.inventory} getInventory={this.getInventory} />
-        <Form getInventory={this.getInventory} />
+
+        <Dashboard inventory={this.state.inventory} getInventory={this.getInventory} getSelectedProduct={this.getSelectedProduct} />
+
+        <Form getInventory={this.getInventory} selectedProduct={this.state.selectedProduct} />
       </div>
     );
   }
