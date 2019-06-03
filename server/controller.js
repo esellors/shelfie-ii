@@ -15,6 +15,8 @@ module.exports = {
       const {name, price, image} = req.body;
       const dbInstance = req.app.get('db');
 
+      console.log(typeof price)
+
       dbInstance.create_product(name, price, image)
          .then(() => res.sendStatus(200))
          .catch(err => {
@@ -22,7 +24,22 @@ module.exports = {
             console.log(err);
          });
    },
+   editProduct: (req, res) => {
+      const {id} = req.params;
+      const {name, price, image} = req.body;
+      const dbInstance = req.app.get('db');
+
+      dbInstance.edit_product(id, name, price, image)
+         .then(() => res.sendStatus(200))
+         .catch(err => {
+            res.sendStatus(500);
+            console.log(err);
+         });
+   },
    deleteProduct: (req, res) => {
+
+
+
       const {id} = req.params;
       const dbInstance = req.app.get('db');
 

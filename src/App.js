@@ -30,9 +30,8 @@ class App extends Component {
       .catch(err => console.log(err));
   }
   getSelectedProduct(e) {
-    console.log(e.target.name)
     this.setState({
-      selectedProduct: e.target
+      selectedProduct: e.target.id
     })
   }
   render() {
@@ -45,7 +44,7 @@ class App extends Component {
 
         <Dashboard inventory={this.state.inventory} getInventory={this.getInventory} getSelectedProduct={this.getSelectedProduct} />
 
-        <Form getInventory={this.getInventory} selectedProduct={this.state.selectedProduct} />
+        <Form inventory={this.state.inventory} getInventory={this.getInventory} selectedProduct={this.state.selectedProduct} />
       </div>
     );
   }

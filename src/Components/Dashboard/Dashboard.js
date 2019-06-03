@@ -8,7 +8,9 @@ class Dashboard extends Component {
       this.deleteProduct = this.deleteProduct.bind(this);
    }
    deleteProduct(e) {
-      const id = e.target.name;
+      const id = e.target.id;
+
+      console.log(id)
 
       axios.delete(`/api/product/${id}`)
          .then(() => this.props.getInventory())
@@ -27,11 +29,9 @@ class Dashboard extends Component {
             <h1>Dashboard</h1>
 
             {
-    
-                  inventory.map((item, index) => {
-                     return <Product item={item} key={index} deleteProduct={this.deleteProduct} getSelectedProduct={this.props.getSelectedProduct} />
-                  })
-      
+               inventory.map((item, index) => {
+                  return <Product item={item} key={index} deleteProduct={this.deleteProduct} getSelectedProduct={this.props.getSelectedProduct} />
+               })
             }
 
          </div>

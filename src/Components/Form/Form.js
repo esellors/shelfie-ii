@@ -8,21 +8,21 @@ class Form extends Component {
          name: '',
          price: 0,
          image: 'https://via.placeholder.com/150',
-         selectedProduct: null
+         selectedProduct: null,
+         toggle: false
       }
       this.handleUserInput = this.handleUserInput.bind(this);
       this.addProduct = this.addProduct.bind(this);
       this.clearUserInput = this.clearUserInput.bind(this);
+      this.saveEditedProduct = this.saveEditedProduct.bind(this);
    }
    componentDidUpdate(prevProps) {
       if (prevProps.selectedProduct !== this.props.selectedProduct) {
          this.setState({
-            selectedProduct: this.props.selectedProduct
+            selectedProduct: this.props.selectedProduct,
+            toggle: true
          })
       }
-      
-
-
    }
    handleUserInput(e) {
       switch(e.target.name) {
@@ -49,8 +49,10 @@ class Form extends Component {
       this.setState({
          name: '',
          price: 0,
-         image: ''
+         image: '',
+         toggle: false
       })
+      
    }
    addProduct(e) {
       e.preventDefault();
@@ -62,6 +64,20 @@ class Form extends Component {
             this.clearUserInput();
          })
          .catch(err => console.log(err));
+   }
+   saveEditedProduct(e) {
+      e.preventDefault();
+
+      axios.put(`/api/product/${this.state.selectedProduct}`,
+         {
+            name: this.state.name,
+            price: this.state.price,
+            image: this.state.image
+         })
+         .then(() => {
+            this.props.getInventory();
+            this.clearUserInput();
+         })
    }
    render() {
 
@@ -75,6 +91,7 @@ class Form extends Component {
             <form id='input_product'>
                <label htmlFor='input_image'>Image URL:</label>
                <input type='text' name='input_image' id='input_image' value={this.state.image} onChange={this.handleUserInput} />
+
                <label htmlFor='input_name'>Product Name:</label>
                <input type='text' name='input_name' id='input_name' value={this.state.name} onChange={this.handleUserInput} />
                
@@ -83,7 +100,12 @@ class Form extends Component {
 
                <input type='button' value='Cancel' onClick={this.clearUserInput} />
 
-               <input type='submit' value='Add to Inventory' onClick={this.addProduct} />
+               {
+                  this.state.toggle === false
+                  ? <input type='submit' value='Add to Inventory' onClick={this.addProduct} />
+
+                  : <input type='submit' value='Save Changes' onClick={this.saveEditedProduct} />
+               }
             </form>
          </div>
       )

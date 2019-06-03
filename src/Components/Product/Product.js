@@ -16,9 +16,9 @@ class Product extends Component {
             <h2>{name}</h2>
             <h2>{price}</h2>
 
-            <input type='button' value='Edit' name={id} onClick={this.props.getSelectedProduct} />
+            <input type='button' value='Edit' id={id} onClick={this.props.getSelectedProduct} />
 
-            <input type='button' value='Delete' name={id} onClick={this.props.deleteProduct}/>
+            <input type='button' value='Delete' id={id} onClick={this.props.deleteProduct}/>
 
          </>
       );
