@@ -95,6 +95,7 @@ class Form extends Component {
             this.props.history.goBack()
          })
    }
+
    render() {
       return (
          <div id='form'>

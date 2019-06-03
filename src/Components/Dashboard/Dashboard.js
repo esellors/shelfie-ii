@@ -15,7 +15,7 @@ class Dashboard extends Component {
       setTimeout(() => {
         this.getInventory()
       }, 1500);
-    }
+    }    
     getInventory() {
       axios.get('/api/inventory')
         .then(res => {
@@ -32,6 +32,7 @@ class Dashboard extends Component {
          .then(() => this.getInventory())
          .catch(err => console.log(err));
    }
+
    render() {
       const {inventory} = this.state;
 
