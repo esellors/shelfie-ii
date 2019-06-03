@@ -100,7 +100,7 @@ class Form extends Component {
          <div id='form'>
 
             <form id='input_product'>
-               <img src={this.state.image} />
+               <img src={this.state.image} alt={this.state.name} />
 
                <label htmlFor='input_image'>Image URL:</label>
                <input type='text' name='input_image' id='input_image' value={this.state.image} onChange={this.handleUserInput} />
