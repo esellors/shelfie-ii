@@ -16,6 +16,11 @@ class Form extends Component {
       this.clearUserInput = this.clearUserInput.bind(this);
       this.saveEditedProduct = this.saveEditedProduct.bind(this);
    }
+   componentWillMount() {
+      this.setState({
+         selectedProduct: this.props.match.params.id
+      })
+   }
    componentDidUpdate(prevProps) {
       if (prevProps.selectedProduct !== this.props.selectedProduct) {
          this.setState({

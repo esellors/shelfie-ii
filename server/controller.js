@@ -11,6 +11,9 @@ module.exports = {
             console.log(err)
             });
    },
+   getProduct: (req, res) => {
+      console.log(req.params)
+   },
    addProduct: (req, res) => {
       const {name, price, image} = req.body;
       const dbInstance = req.app.get('db');
@@ -37,9 +40,6 @@ module.exports = {
          });
    },
    deleteProduct: (req, res) => {
-
-
-
       const {id} = req.params;
       const dbInstance = req.app.get('db');
 

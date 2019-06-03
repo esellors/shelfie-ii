@@ -17,6 +17,7 @@ massive(CONNECTION_STRING).then(db => {
    app.set('db', db);
    
    app.get('/api/inventory', controller.getInventory);
+   app.get('/api/inventory/:id', controller.getProduct);
    app.post('/api/product', controller.addProduct);
    app.delete('/api/product/:id', controller.deleteProduct);
    app.put('/api/product/:id', controller.editProduct);

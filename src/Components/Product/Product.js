@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Product extends Component {
    render() {
 
       console.log('Product.js rendered');
+      console.log(this.props);
 
       const {id, name, price, image} = this.props.item;
 
@@ -16,7 +18,9 @@ class Product extends Component {
             <h2>{name}</h2>
             <h2>{price}</h2>
 
-            <input type='button' value='Edit' id={id} onClick={this.props.getSelectedProduct} />
+            <Link to={`/edit/${id}`}>
+               <input type='button' value='Edit' />
+            </Link>
 
             <input type='button' value='Delete' id={id} onClick={this.props.deleteProduct}/>
 
