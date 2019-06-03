@@ -28,16 +28,11 @@ class Dashboard extends Component {
    deleteProduct(e) {
       const id = e.target.id;
 
-      console.log(id)
-
       axios.delete(`/api/product/${id}`)
          .then(() => this.getInventory())
          .catch(err => console.log(err));
    }
    render() {
-
-      console.log('Dashboard.js rendered');
-
       const {inventory} = this.state;
 
       return (
@@ -48,7 +43,7 @@ class Dashboard extends Component {
 
             {
                inventory.map((item, index) => {
-                  return <Product item={item} index={index} key={index} deleteProduct={this.deleteProduct} />
+                  return <Product item={item} key={index} deleteProduct={this.deleteProduct} />
                })
             }
 

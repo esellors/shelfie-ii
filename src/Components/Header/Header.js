@@ -3,9 +3,6 @@ import {Link} from 'react-router-dom';
 
 class Header extends Component {
    render() {
-
-      console.log('Header.js rendered');
-
       return (
          <>
             <h1>Header</h1>

@@ -4,9 +4,6 @@ import {Link} from 'react-router-dom';
 class Product extends Component {
    render() {
 
-      console.log('Product.js rendered');
-      console.log(this.props);
-
       const {id, name, price, image} = this.props.item;
 
       return (
@@ -18,7 +15,7 @@ class Product extends Component {
             <h2>{name}</h2>
             <h2>{price}</h2>
 
-            <Link to={`/edit/${id}`}>
+            <Link to={`/edit/&${id}/&${name}/&${price}/&${image}/`}>
                <input type='button' value='Edit' />
             </Link>
 

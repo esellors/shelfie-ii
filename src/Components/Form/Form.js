@@ -5,10 +5,10 @@ class Form extends Component {
    constructor(props) {
       super(props);
       this.state = {
+         id: null,
          name: '',
          price: 0,
          image: 'https://via.placeholder.com/150',
-         selectedProduct: null,
          toggle: false
       }
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -16,10 +16,24 @@ class Form extends Component {
       this.clearUserInput = this.clearUserInput.bind(this);
       this.saveEditedProduct = this.saveEditedProduct.bind(this);
    }
-   componentWillMount() {
-      this.setState({
-         selectedProduct: this.props.match.params.id
-      })
+   componentDidMount() {
+
+      if (this.props.match.params.id) {
+         let path = (this.props.history.location.pathname).split('&');
+
+         const id = path[1].slice(0, path[1].length - 1), 
+            name = path[2].slice(0, path[2].length - 1), 
+            price = path[3].slice(0, path[3].length - 1), 
+            image = path[4].slice(0, path[4].length - 1)
+
+         this.setState({
+            id: id,
+            name: name,
+            price: price,
+            image: image,
+            toggle: true
+         })
+      }
    }
    componentDidUpdate(prevProps) {
       if (prevProps.selectedProduct !== this.props.selectedProduct) {
@@ -57,43 +71,39 @@ class Form extends Component {
          image: '',
          toggle: false
       })
-      
+      this.props.history.goBack()
    }
    addProduct(e) {
       e.preventDefault();
-      console.log('+++++ ADD BUTTON CLICKED +++++')
 
       axios.post('/api/product', this.state)
          .then(() => {
-            this.props.getInventory();
-            this.clearUserInput();
+            this.props.history.goBack()
          })
          .catch(err => console.log(err));
    }
    saveEditedProduct(e) {
       e.preventDefault();
 
-      axios.put(`/api/product/${this.state.selectedProduct}`,
+      axios.put(`/api/product/${this.state.id}`,
          {
             name: this.state.name,
             price: this.state.price,
             image: this.state.image
          })
          .then(() => {
-            this.props.getInventory();
-            this.clearUserInput();
+            this.props.history.goBack()
          })
    }
    render() {
-
-      console.log('Form.js rendered');
-
       return (
          <div id='input_product_container'>
 
             <h1>Form</h1>
 
             <form id='input_product'>
+               <img src={this.state.image} />
+
                <label htmlFor='input_image'>Image URL:</label>
                <input type='text' name='input_image' id='input_image' value={this.state.image} onChange={this.handleUserInput} />
 

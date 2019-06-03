@@ -11,14 +11,9 @@ module.exports = {
             console.log(err)
             });
    },
-   getProduct: (req, res) => {
-      console.log(req.params)
-   },
    addProduct: (req, res) => {
       const {name, price, image} = req.body;
       const dbInstance = req.app.get('db');
-
-      console.log(typeof price)
 
       dbInstance.create_product(name, price, image)
          .then(() => res.sendStatus(200))
