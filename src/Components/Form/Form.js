@@ -97,9 +97,7 @@ class Form extends Component {
    }
    render() {
       return (
-         <div id='input_product_container'>
-
-            <h1>Form</h1>
+         <div id='form'>
 
             <form id='input_product'>
                <img src={this.state.image} />
@@ -113,14 +111,17 @@ class Form extends Component {
                <label htmlFor='input_price'>Price:</label>
                <input type='text' name='input_price' id='input_price' value={this.state.price} onChange={this.handleUserInput} />
 
-               <input type='button' value='Cancel' onClick={this.clearUserInput} />
+               <span className='main-buttons'>
 
-               {
-                  this.state.toggle === false
-                  ? <input type='submit' value='Add to Inventory' onClick={this.addProduct} />
+                  <input className='form-buttons' type='button' value='Cancel' onClick={this.clearUserInput} />
 
-                  : <input type='submit' value='Save Changes' onClick={this.saveEditedProduct} />
-               }
+                  {
+                     this.state.toggle === false
+                     ? <input className='form-buttons' type='submit' value='Add to Inventory' onClick={this.addProduct} />
+
+                     : <input className='form-buttons' type='submit' value='Save Changes' onClick={this.saveEditedProduct} />
+                  }
+               </span>
             </form>
          </div>
       )

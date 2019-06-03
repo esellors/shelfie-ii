@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 class Header extends Component {
    render() {
       return (
-         <>
-            <h1>Header</h1>
+         <header>
+            <h1>SHELFIE</h1>
             <span>
                <Link to='/'>
                   <input type='button' value='Dashboard' />
@@ -14,7 +14,7 @@ class Header extends Component {
                   <input type='button' value='Add Inventory' />
                </Link>
             </span>
-         </>
+         </header>
       )
    };
 }

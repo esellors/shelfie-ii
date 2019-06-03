@@ -7,21 +7,30 @@ class Product extends Component {
       const {id, name, price, image} = this.props.item;
 
       return (
-         <>
-
-            <h1>Product</h1>
+         <div className='product-card'>
 
             <img src={image} alt={name} />
-            <h2>{name}</h2>
-            <h2>{price}</h2>
 
-            <Link to={`/edit/&${id}/&${name}/&${price}/&${image}/`}>
-               <input type='button' value='Edit' />
-            </Link>
+            <span className='card-inner-1'>
+               <span className='card-inner-2'>
+                  <h2>{name}</h2>
+                  <h2>${price}</h2>
+               </span>
 
-            <input type='button' value='Delete' id={id} onClick={this.props.deleteProduct}/>
+               <span className='main-buttons'>
+                  <div>
+                     <Link to={`/edit/&${id}/&${name}/&${price}/&${image}/`}>
+                        <input type='button' value='Edit' />
+                     </Link>
+                  </div>
 
-         </>
+                  <div>
+                     <input type='button' value='Delete' id={id} onClick={this.props.deleteProduct}/>
+                  </div>
+               </span>
+            </span>
+
+         </div>
       );
    }
 }
